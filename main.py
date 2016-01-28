@@ -3,4 +3,4 @@ __author__ = 'felipesfaria'
 import examples as e
 
 e.HelloMongo()
-e.DestroyManhattan()
+e.SomeoneHatesPizza()
