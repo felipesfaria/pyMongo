@@ -1,4 +1,6 @@
 __author__ = 'felipesfaria'
-import functions as f
+# -*- coding: utf-8 -*-
+import examples as e
 
-f.Hello()
+e.HelloMongo()
+e.DestroyManhattan()
