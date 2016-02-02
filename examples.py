@@ -164,3 +164,39 @@ def DestroyManhattan():
     result = db.restaurants.delete_many({"borough": "Manhattan"})
     print "{} restaurantes destroyed".format(result.deleted_count)
     print ("No more food in manhattan!")
+
+def CreateCousineIndex():
+    client = MongoClient()
+    db = client.test
+    db.restaurants.create_index([("cuisine", pymongo.ASCENDING)])
+
+def CreateBoroughNameIndex():
+    client = MongoClient()
+    db = client.test
+    db.restaurants.create_index([("borough", pymongo.ASCENDING),("adress.zipcode",pymongo.ASCENDING)])
+
+def CreateUniqueRestaurantIdIndex():
+    client = MongoClient()
+    db = client.test
+    db.restaurants.create_index([("restaurant_id", pymongo.ASCENDING)],unique=True)
+
+def CreateUniqueRestaurantIdIndex():
+    client = MongoClient()
+    db = client.test
+    db.restaurants.create_index([("restaurant_id", pymongo.ASCENDING)],unique=True)
+
+def AddDuplicateNumberID():
+    client = MongoClient()
+    db = client.test
+    db.restaurants.insert_one({"restaurant_id":"50018995"})
+
+def FindRedundantNames():
+    client = MongoClient()
+    db = client.test
+    cursor = db.restaurants.aggregate(
+        [
+            {"$group": {"_id": "$name", "count": {"$sum": 1}}},
+            {"$sort": {"count": 1}}
+        ])
+    for document in cursor:
+        print(document)
