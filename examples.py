@@ -180,11 +180,6 @@ def CreateUniqueRestaurantIdIndex():
     db = client.test
     db.restaurants.create_index([("restaurant_id", pymongo.ASCENDING)],unique=True)
 
-def CreateUniqueRestaurantIdIndex():
-    client = MongoClient()
-    db = client.test
-    db.restaurants.create_index([("restaurant_id", pymongo.ASCENDING)],unique=True)
-
 def AddDuplicateNumberID():
     client = MongoClient()
     db = client.test
