@@ -15,8 +15,8 @@ Carlos = {"nome":"Carlos","sobrenome":"Carvalho","estado":"RJ", "telefone":[{"no
 contato.insert_many([Bruno,Carlos])
 
 #Quem sao meus amigos?
-print "Contatos:"
 cursor = contato.find({},{"_id":0,"nome":1})
+print "Nomes:"
 for document in cursor:
     print(document)
 
@@ -31,6 +31,7 @@ cursor = contato.aggregate(
         [
             {"$group": {"_id": "$estado", "count": {"$sum": 1}}}
         ])
+print "Amigos por estado:"
 for document in cursor:
     print(document)
 
@@ -44,13 +45,13 @@ contato.update_many({"nome":{"$ne":"Daniela"}},{"$set":{"sexo":"m"}})
 contato.delete_one({"nome":"Carlos"})
 
 #Vou dar uma festa, quem eu posso convidar do rio?
-print "Moram no rio e tem celular:"
 cursor = contato.find({"estado":"RJ","telefone.nome":"celular"},{"_id":0,"nome":1,"telefone.numero":1}).sort("nome",1)
+print "Moram no rio e tem celular:"
 for document in cursor:
     print(document)
 
 #Quero ver minha agenda completa
-print "Contatos:"
 cursor = contato.find()
+print "Contatos:"
 for document in cursor:
     print(document)
